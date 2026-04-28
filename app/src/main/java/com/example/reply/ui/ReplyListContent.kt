@@ -62,7 +62,6 @@ fun ReplyInboxScreen(
             navigateToDetail = navigateToDetail
         )
 
-        // Botón corregido con el tema Terciario
         LargeFloatingActionButton(
             onClick = { /* Click Implementation */ },
             modifier = Modifier
