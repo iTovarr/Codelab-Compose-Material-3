@@ -30,6 +30,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeFloatingActionButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,7 +51,6 @@ fun ReplyInboxScreen(
     navigateToDetail: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
-
     val emailLazyListState = rememberLazyListState()
 
     Box(modifier = modifier.fillMaxSize()) {
@@ -62,11 +62,14 @@ fun ReplyInboxScreen(
             navigateToDetail = navigateToDetail
         )
 
+        // Botón corregido con el tema Terciario
         LargeFloatingActionButton(
-            onClick = { /*Click Implementation*/ },
+            onClick = { /* Click Implementation */ },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(16.dp),
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         ) {
             Icon(
                 imageVector = Icons.Default.Edit,
@@ -74,7 +77,6 @@ fun ReplyInboxScreen(
                 modifier = Modifier.size(28.dp)
             )
         }
-
     }
 }
 

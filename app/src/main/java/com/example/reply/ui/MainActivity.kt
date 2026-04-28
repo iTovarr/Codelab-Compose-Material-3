@@ -16,6 +16,7 @@
 
 package com.example.reply.ui
 
+import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
@@ -36,15 +37,22 @@ import com.example.reply.ui.theme.AppTheme
 class MainActivity : ComponentActivity() {
 
     private val viewModel: ReplyHomeViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             AppTheme {
-                Surface(tonalElevation = 5.dp) { // Base para el contraste tonal
-                    ReplyApp(replyHomeUIState = uiState)
+                Surface(tonalElevation = 5.dp) {
+                    ReplyApp(
+                        replyHomeUIState = uiState,
+                        closeDetailScreen = {
+                            viewModel.closeDetailScreen()
+                        },
+                        navigateToDetail = { emailId ->
+                            viewModel.setSelectedEmail(emailId)
+                        }
+                    )
                 }
             }
         }
@@ -52,18 +60,20 @@ class MainActivity : ComponentActivity() {
 }
 
 @Preview(
-    uiMode = UI_MODE_NIGHT_YES,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
     name = "DefaultPreviewDark"
 )
 @Preview(
-    uiMode = UI_MODE_NIGHT_NO,
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
     name = "DefaultPreviewLight"
 )
 @Composable
-fun ReplyAppPreviewLight() {
-    ReplyApp(
-        replyHomeUIState = ReplyHomeUIState(
-            emails = LocalEmailsDataProvider.allEmails
+fun ReplyAppPreview() {
+    AppTheme {
+        ReplyApp(
+            replyHomeUIState = ReplyHomeUIState(
+                emails = LocalEmailsDataProvider.allEmails
+            )
         )
-    )
+    }
 }

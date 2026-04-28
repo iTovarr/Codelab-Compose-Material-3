@@ -16,11 +16,13 @@
 
 package com.example.reply.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
@@ -41,18 +43,21 @@ import androidx.compose.ui.unit.dp
 import com.example.reply.R
 import com.example.reply.data.Email
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReplySearchBar(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(16.dp)
+            .background(MaterialTheme.colorScheme.background, CircleShape),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             imageVector = Icons.Default.Search,
             contentDescription = stringResource(id = R.string.search),
             modifier = Modifier.padding(start = 16.dp),
+            tint = MaterialTheme.colorScheme.outline
         )
         Text(
             text = stringResource(id = R.string.search_replies),
@@ -60,6 +65,7 @@ fun ReplySearchBar(modifier: Modifier = Modifier) {
                 .weight(1f)
                 .padding(16.dp),
             style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.outline
         )
         ReplyProfileImage(
             drawableResource = R.drawable.avatar_6,
